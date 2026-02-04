@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Sentinel - AI Agentic Honey-Pot",
+  "description": "An autonomous cybersecurity honey-pot system designed to detect scam messages, engage scammers with believable personas, and extract actionable intelligence like bank details and phishing URLs.",
+  "requestFramePermissions": []
+}
