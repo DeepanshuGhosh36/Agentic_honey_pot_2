@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface SidebarProps {
@@ -7,46 +6,51 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
-  const tabs = [
-    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { id: 'sessions', label: 'Active Sessions', icon: '⚡' },
-    { id: 'vault', label: 'Intel Vault', icon: '📂' },
-    { id: 'settings', label: 'Config', icon: '⚙️' },
+  const menuItems = [
+    { id: 'dashboard', label: 'Command Center', icon: '⚡' },
+    { id: 'intel', label: 'Intel Database', icon: '' },
+    { id: 'network', label: 'Agent Network', icon: '' },
+    { id: 'settings', label: 'System Config', icon: '⚙️' },
   ];
 
   return (
-    <div className="w-64 h-full bg-[#0d0d10] border-r border-white/5 flex flex-col p-4">
-      <div className="flex items-center gap-3 mb-10 px-2">
-        <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-bold text-black">S</div>
-        <h1 className="text-xl font-bold tracking-tight">SENTINEL</h1>
+    <aside className="w-64 bg-[#0d0d10] border-r border-white/5 flex flex-col">
+      <div className="p-6">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-emerald-900/20">
+            S
+          </div>
+          <h1 className="font-bold text-xl tracking-tight">Sentinel</h1>
+        </div>
+
+        <nav className="space-y-2">
+          {menuItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveTab(item.id)}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                activeTab === item.id
+                  ? 'bg-emerald-600/10 text-emerald-400 border border-emerald-500/20'
+                  : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'
+              }`}
+            >
+              <span>{item.icon}</span>
+              {item.label}
+            </button>
+          ))}
+        </nav>
       </div>
 
-      <nav className="flex-1 space-y-1">
-        {tabs.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
-              activeTab === tab.id 
-                ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
-                : 'text-zinc-400 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <span className="text-lg">{tab.icon}</span>
-            <span className="font-medium">{tab.label}</span>
-          </button>
-        ))}
-      </nav>
-
-      <div className="mt-auto p-4 bg-zinc-900/50 rounded-xl border border-white/5">
-        <p className="text-xs text-zinc-500 mb-1">System Status</p>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-          <span className="text-xs font-mono text-emerald-500">AGENT_ACTIVE</span>
+      <div className="mt-auto p-6 border-t border-white/5">
+        <div className="flex items-center gap-3">
+          <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+          <span className="text-xs font-mono text-zinc-500">SYSTEM ONLINE</span>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
+
+export default Sidebar;
 
 export default Sidebar;
